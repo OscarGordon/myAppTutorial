@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Hello Ionic</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+  <h3>Welcome to your first Ionic app!</h3>
+
+  <p>
+    This starter project is our way of helping you get a functional app running in record time.
+  </p>
+  <p>
+    Follow along on the tutorial section of the Ionic docs!
+  </p>
+  <p>
+    <button ion-button color="primary" menuToggle>Toggle Menu</button>
+  </p>
+  <p>
+    <ion-label stacked>number</ion-label>    
+    <ion-input ngModel="numero" type="number" placeholder="how much?"></ion-input>
+    <ion-label stacked>text</ion-label>
+    <ion-input ngModel="texto" type="text" placeholder="pon texto aqui?"></ion-input>
+    <button ion-button color="secondary" (click)="createItem(numero, texto)">SendData</button>
+  </p>
+
+</ion-content>
