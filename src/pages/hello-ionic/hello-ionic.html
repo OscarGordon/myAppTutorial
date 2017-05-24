@@ -21,12 +21,22 @@
   <p>
     <button ion-button color="primary" menuToggle>Toggle Menu</button>
   </p>
+  <ion-list>
+    <ion-item *ngFor="let element of elements | async" (click)="showOptions(element.$key, element.title)">
+      {{element.title}}
+    </ion-item>
+  </ion-list>
   <p>
     <ion-label stacked>number</ion-label>    
     <ion-input ngModel="numero" type="number" placeholder="how much?"></ion-input>
     <ion-label stacked>text</ion-label>
     <ion-input ngModel="texto" type="text" placeholder="pon texto aqui?"></ion-input>
-    <button ion-button color="secondary" (click)="createItem(numero, texto)">SendData</button>
+    
+    <ion-buttons end>
+      <button ion-button icon-only (click)="addElement()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
   </p>
 
 </ion-content>
