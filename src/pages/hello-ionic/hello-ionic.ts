@@ -5,6 +5,8 @@ import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabaseModule, AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { NavController, AlertController, ActionSheetController } from 'ionic-angular';
 
+import { AthleteDetailsPage } from '../athlete-details/athlete-details';
+
 @Component({
   selector: 'page-hello-ionic',
   templateUrl: 'hello-ionic.html'
@@ -109,5 +111,9 @@ updateElement(elementId, elementTitle){
     ]
   });
   prompt.present();
+}
+
+goToPage(){
+  this.navCtrl.push(AthleteDetailsPage);
 }
 }

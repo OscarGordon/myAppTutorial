@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-navbar>
+     <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Athlete Details</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+<ion-card>
+  <ion-item>
+    <ion-avatar item-left>
+      <img src="img/default-avatar.png">
+    </ion-avatar>
+    <h2>Nick del Atleta</h2>
+    <p>Registrado al Box ...</p>
+    <button ion-button outline item-right>Select Box</button>
+  </ion-item>
+  <ion-card-content>
+    <p>Descripción del atleta: ....</p>
+  </ion-card-content>
+
+  <ion-row>
+    <ion-col>
+      <ion-list>
+        <ion-item>
+          <ion-label stacked>Name</ion-label>
+          <ion-input type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Birth Date</ion-label>
+          <ion-datetime displayFormat="DD/MM/YYYY"></ion-datetime>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Height</ion-label>
+          <ion-input type="number"></ion-input>
+        </ion-item>
+      </ion-list>      
+    </ion-col>
+    <ion-col>
+      <ion-list>
+        <ion-item>
+          <ion-label stacked>Surname</ion-label>
+          <ion-input type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Gender</ion-label>
+          <ion-input type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Weight</ion-label>
+          <ion-input type="number"></ion-input>
+        </ion-item>
+      </ion-list>      
+    </ion-col>
+  </ion-row>
+  <button ion-button full>Save</button>
+</ion-card>  
+
+</ion-content>

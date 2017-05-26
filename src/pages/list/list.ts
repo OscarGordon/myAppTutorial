@@ -8,7 +8,7 @@ import { ItemDetailsPage } from '../item-details/item-details';
   selector: 'page-list',
   templateUrl: 'list.html'
 })
-export class ListPage {
+export class ListPage { 
   icons: string[];
   items: Array<{title: string, note: string, icon: string}>;
 
