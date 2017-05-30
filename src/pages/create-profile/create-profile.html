@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>
+      Crear Perfil
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="profileForm" (submit)="createProfile()" novalidate>
+
+    <ion-item>
+      <ion-label stacked>Nombre</ion-label>
+      <ion-input #name formControlName="name" type="text" placeholder="Tu nombre" required></ion-input>
+    </ion-item>
+    
+    <ion-item>
+      <ion-label stacked>Apellidos</ion-label>
+      <ion-input #surname formControlName="surname" type="text" placeholder="Tus apellidos" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Fecha de Nacimiento</ion-label>
+      <ion-datetime #birthdate formControlName="birthdate" displayFormat="DD/MM/YYYY" required></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Sexo</ion-label>
+      <ion-input #gender formControlName="gender" type="text" placeholder="Hombre/Mujer" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Altura</ion-label>
+      <ion-input #height formControlName="height" type="number" placeholder="Tu altura (cm)" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Peso</ion-label>
+      <ion-input #weight formControlName="weight" type="number" placeholder="Tu peso (kg)" required></ion-input>
+    </ion-item>
+    
+    <button ion-button block type="submit">
+      OK
+    </button>
+
+  </form>
+
+</ion-content>

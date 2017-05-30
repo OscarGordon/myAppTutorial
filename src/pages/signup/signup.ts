@@ -9,6 +9,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthProvider } from '../../providers/auth/auth';
 import { HelloIonicPage } from '../hello-ionic/hello-ionic';
 import { EmailValidator } from '../../validators/email';
+import { CreateProfilePage } from '../create-profile/create-profile';
+
 
 //@IonicPage()
 @Component({
@@ -18,6 +20,8 @@ import { EmailValidator } from '../../validators/email';
 export class SignupPage {
   public signupForm:FormGroup;
   public loading:Loading;
+  //var to store current user
+  public currentUser: AuthProvider;
 
   constructor(public nav: NavController, public authData: AuthProvider, 
     public formBuilder: FormBuilder, public loadingCtrl: LoadingController, 
@@ -41,7 +45,9 @@ export class SignupPage {
     } else {
       this.authData.signupUser(this.signupForm.value.email, this.signupForm.value.password)
       .then(() => {
-        this.nav.setRoot(HelloIonicPage);
+        //this.nav.setRoot(HelloIonicPage);
+        
+        this.nav.setRoot(CreateProfilePage);
       }, (error) => {
         this.loading.dismiss().then( () => {
           var errorMessage: string = error.message;

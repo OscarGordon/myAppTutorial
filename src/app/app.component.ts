@@ -8,6 +8,7 @@ import { AthleteDetailsPage } from '../pages/athlete-details/athlete-details';
 import { LoginPage } from '../pages/login/login';
 import { SignupPage } from '../pages/signup/signup';
 import { ResetPasswordPage } from '../pages/reset-password/reset-password';
+import { CreateProfilePage } from '../pages/create-profile/create-profile';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -59,7 +60,8 @@ export class MyApp {
       { title: 'Athlete Details', component: AthleteDetailsPage },
       { title: 'Login Page', component: LoginPage },
       { title: 'Signup Page', component: SignupPage },
-      { title: 'Reset Password', component: ResetPasswordPage}
+      { title: 'Reset Password', component: ResetPasswordPage},
+      { title: 'Create Profile', component: CreateProfilePage}
     ];
   }
 

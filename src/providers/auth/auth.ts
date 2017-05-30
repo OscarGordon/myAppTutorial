@@ -31,7 +31,11 @@ export class AuthProvider {
   }
   //create user function
   signupUser(newEmail: string, newPassword: string): firebase.Promise<any> {
-  return this.afAuth.auth.createUserWithEmailAndPassword(newEmail, newPassword);
+  //return this.afAuth.auth.createUserWithEmailAndPassword(newEmail, newPassword);
+  return this.afAuth.auth.createUserWithEmailAndPassword(newEmail, newPassword)
+    .then( newUser => {
+      firebase.database().ref('/userProfiles').child(newUser.uid).set({ email: newEmail});
+    });
   }
 
 }
