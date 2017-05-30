@@ -10,13 +10,17 @@ import { ListPage } from '../pages/list/list';
 import { AthleteDetailsPage } from '../pages/athlete-details/athlete-details';
 import { LoginPage } from '../pages/login/login';
 import { SignupPage } from '../pages/signup/signup';
+import { ResetPasswordPage } from '../pages/reset-password/reset-password';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { AuthProvider } from '../providers/auth/auth';
 
 // Import the AngularFire2 modules
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
+
 
 // AngularFire2 settings
 export const firebaseConfig = {
@@ -36,14 +40,16 @@ export const firebaseConfig = {
     ListPage,
     AthleteDetailsPage,
     LoginPage,
-    SignupPage
+    SignupPage,
+    ResetPasswordPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     // angularfiremodule initialization
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -53,12 +59,14 @@ export const firebaseConfig = {
     ListPage,
     AthleteDetailsPage,
     LoginPage,
-    SignupPage
+    SignupPage,
+    ResetPasswordPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    AuthProvider
   ]
 })
 export class AppModule {}

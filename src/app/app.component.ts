@@ -7,9 +7,13 @@ import { ListPage } from '../pages/list/list';
 import { AthleteDetailsPage } from '../pages/athlete-details/athlete-details';
 import { LoginPage } from '../pages/login/login';
 import { SignupPage } from '../pages/signup/signup';
+import { ResetPasswordPage } from '../pages/reset-password/reset-password';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+
+// import Firebase
+import { AngularFireAuth } from 'angularfire2/auth';
 
 // import { FIREBASE_PROVIDERS, defaultFirebase } from 'angularfire2';
 
@@ -21,15 +25,31 @@ export class MyApp {
 
   // make HelloIonicPage the root (or first) page
   //rootPage = HelloIonicPage;
-  rootPage = LoginPage;
+  
+  // Before going to home page we need to verify user auth
+  //rootPage = LoginPage;
+  rootPage: any;
+  
   pages: Array<{title: string, component: any}>;
 
   constructor(
     public platform: Platform,
     public menu: MenuController,
     public statusBar: StatusBar,
-    public splashScreen: SplashScreen
+    public splashScreen: SplashScreen,
+    public afAuth: AngularFireAuth
   ) {
+    //create the subscribe function
+    const authObserver = afAuth.authState.subscribe( user => {
+      if (user) {
+        this.rootPage = HelloIonicPage;
+        authObserver.unsubscribe();
+      } else {
+        this.rootPage = LoginPage;
+        authObserver.unsubscribe();
+      }
+    });
+
     this.initializeApp();
 
     // set our app's pages
@@ -38,7 +58,8 @@ export class MyApp {
       { title: 'My First List', component: ListPage },
       { title: 'Athlete Details', component: AthleteDetailsPage },
       { title: 'Login Page', component: LoginPage },
-      { title: 'Signup Page', component: SignupPage }
+      { title: 'Signup Page', component: SignupPage },
+      { title: 'Reset Password', component: ResetPasswordPage}
     ];
   }
 
