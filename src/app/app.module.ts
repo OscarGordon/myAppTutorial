@@ -12,6 +12,8 @@ import { LoginPage } from '../pages/login/login';
 import { SignupPage } from '../pages/signup/signup';
 import { ResetPasswordPage } from '../pages/reset-password/reset-password';
 import { CreateProfilePage } from '../pages/create-profile/create-profile';
+import { SelectExercisesPage } from '../pages/select-exercises/select-exercises';
+import { NewSessionPage } from '../pages/new-session/new-session';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -43,7 +45,9 @@ export const firebaseConfig = {
     LoginPage,
     SignupPage,
     ResetPasswordPage,
-    CreateProfilePage
+    CreateProfilePage,
+    SelectExercisesPage,
+    NewSessionPage
   ],
   imports: [
     BrowserModule,
@@ -63,7 +67,9 @@ export const firebaseConfig = {
     LoginPage,
     SignupPage,
     ResetPasswordPage,
-    CreateProfilePage
+    CreateProfilePage,
+    SelectExercisesPage,
+    NewSessionPage
   ],
   providers: [
     StatusBar,

@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons start>
+      <button ion-button>Cancelar</button>
+    </ion-buttons>
+    
+    <ion-title>Selecciona Ejercicios</ion-title>
+    <ion-buttons end>
+      <button ion-button>Siguiente</button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-searchbar padding (input)="getExercises($event)"></ion-searchbar>
+  <ion-segment padding>
+    <ion-segment-button value="Fuerza">Fuerza</ion-segment-button>
+    <ion-segment-button value="Endurance">Endurance</ion-segment-button>
+    <ion-segment-button value="Gimnastico">Gimnástico</ion-segment-button>
+  </ion-segment>
+  <ion-list>
+    <ion-item *ngFor="let exercise of exercises | async">
+        {{ exercise.exercise }}
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-title>elementos seleccionados</ion-title>
+  </ion-toolbar>
+</ion-footer>

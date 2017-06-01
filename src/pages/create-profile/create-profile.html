@@ -21,12 +21,20 @@
 
     <ion-item>
       <ion-label stacked>Fecha de Nacimiento</ion-label>
-      <ion-datetime #birthdate formControlName="birthdate" displayFormat="DD/MM/YYYY" required></ion-datetime>
+      <ion-datetime #birthdate formControlName="birthdate" displayFormat="DD/MM/YYYY" required cancelText="Cancelar" doneText="Aceptar" placeholder="Tu fecha de nacimiento"></ion-datetime>
     </ion-item>
+
+    <!--ion-item>
+      <ion-label stacked>Sexo</ion-label>
+      <ion-input #gender formControlName="gender" type="text" placeholder="Hombre/Mujer" required></ion-input>
+    </ion-item -->
 
     <ion-item>
       <ion-label stacked>Sexo</ion-label>
-      <ion-input #gender formControlName="gender" type="text" placeholder="Hombre/Mujer" required></ion-input>
+      <ion-select #gender formControlName="gender">
+        <ion-option>Hombre</ion-option>
+        <ion-option>Mujer</ion-option>
+      </ion-select>
     </ion-item>
 
     <ion-item>
@@ -44,5 +52,5 @@
     </button>
 
   </form>
-
+<p>Utilizamos estos datos para las analíticas, y para que puedas compararte con otros atletas similares a ti</p>
 </ion-content>

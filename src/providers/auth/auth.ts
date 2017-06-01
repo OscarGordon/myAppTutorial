@@ -34,7 +34,7 @@ export class AuthProvider {
   //return this.afAuth.auth.createUserWithEmailAndPassword(newEmail, newPassword);
   return this.afAuth.auth.createUserWithEmailAndPassword(newEmail, newPassword)
     .then( newUser => {
-      firebase.database().ref('/userProfiles').child(newUser.uid).set({ email: newEmail});
+      firebase.database().ref('/userProfiles').child(newUser.uid).set({ email: newEmail, followers: {}, following: {}});
     });
   }
 
