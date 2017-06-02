@@ -15,18 +15,38 @@ import firebase from 'firebase';
 })
 export class SelectExercisesPage {
   exercises: FirebaseListObservable<any>;
-  public exerciseList: Array<any>;
-  public loadedExerciseList: Array<any>;
-  public exerciseRef: firebase.database.Reference;
+  //public exerciseList: Array<any>;
+  public exerciseList: any[] = [];
+
+  //public loadedExerciseList: Array<any>;
+  public loadedExerciseList: any[] = [];
+  //public exerciseRef: firebase.database.Reference;
 
   //searchQuery: string ='';
 
   constructor(public navCtrl: NavController, public af: AngularFireDatabase, public alertCtrl: AlertController, 
       public actionSheetCtrl: ActionSheetController) {
         this.exercises = af.list('/exercises');
-        this.exerciseRef = firebase.database().ref('/exercises');
+        console.log ("listado de ejercicios: ", this.exercises);
+        /* this.exercises.forEach( exercise => {
+          console.log("ejercicio: ", exercise);
+          this.exerciseList.push(exercise)});*/
+          this.exercises.subscribe( exercises => {
+            exercises.forEach(exercise => {
+              console.log("ejercicio: ", exercise);
+              this.exerciseList.push(exercise);
+              console.log("listado: ", this.exerciseList);
+            });
+            this.loadedExerciseList = this.exerciseList;
+            console.log("listado cargado: ", this.loadedExerciseList);
+          });
+          
+          
+          
+        
+        //this.exerciseRef = firebase.database().ref('/exercises');
 
-        this.exerciseRef.on('value', exerciseList => {
+       /* this.exerciseRef.on('value', exerciseList => {
           let exercises = [];
           exerciseList.forEach( exercise => {
             exercises.push(exercise.val());
@@ -35,7 +55,7 @@ export class SelectExercisesPage {
 
           this.exerciseList = exercises;
           this.loadedExerciseList = exercises;
-        }); 
+        }); */
         
   }
 
@@ -56,14 +76,9 @@ export class SelectExercisesPage {
     // if the value is an empty string then do not filter the items
     if (val && val.trim() != ''){
       console.log('entro por el if de cadena no vacia', val);
-      this.exerciseList = this.exerciseList.filter((v) => {
-        if(v.exercise && val){
-          if (v.name.toLowerCase().indexOf(val.toLowerCase()) > -1){
-            return true;
-          }
-          return false;
-        }
-      });
+      this.exerciseList = this.exerciseList.filter((exercise) => {
+          return (exercise.exercise.toLowerCase().indexOf(val.toLowerCase()) > -1)
+      })
     }
 
   }

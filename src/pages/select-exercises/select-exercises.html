@@ -20,7 +20,8 @@
     <ion-segment-button value="Gimnastico">Gimnástico</ion-segment-button>
   </ion-segment>
   <ion-list>
-    <ion-item *ngFor="let exercise of exercises | async">
+    <!--ion-item *ngFor="let exercise of exercise | async"-->
+    <ion-item *ngFor="let exercise of exerciseList">  
         {{ exercise.exercise }}
     </ion-item>
   </ion-list>
