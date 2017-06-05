@@ -23,7 +23,12 @@ export class SelectExercisesPage {
   public searchString = '';
   //variable para almacenar el valor del segmento
   public segmentValue = '';
+  //Array para almacenar los ejercicios seleccionados
+  public selectedExerciseList: any[] = [];
+  //Variable para contar el número de ejercicios seleccionados
+  public numExercises = 0;
 
+  
   constructor(public navCtrl: NavController, public af: AngularFireDatabase, public alertCtrl: AlertController, 
       public actionSheetCtrl: ActionSheetController) {
         //Recuperamos la lista de ejercicios del backend
@@ -68,7 +73,7 @@ export class SelectExercisesPage {
 
   selectedWeight(){
     this.segmentValue = 'weightlifting';
-     //console.log("search string: ", this.searchString);
+    //console.log("search string: ", this.searchString);
     this.initializeExercises();
     this.exerciseList = this.exerciseList.filter((exercise) => {        
         return (exercise.type.toLowerCase().indexOf("weightlifting") > -1 && exercise.exercise.toLowerCase().indexOf(this.searchString.toLowerCase()) > -1)
@@ -91,6 +96,21 @@ export class SelectExercisesPage {
     this.exerciseList = this.exerciseList.filter((exercise) => {        
         return (exercise.type.toLowerCase().indexOf("endurance") > -1 && exercise.exercise.toLowerCase().indexOf(this.searchString.toLowerCase()) > -1)
     })
+  }
+
+  selectItem(exerciseId, exerciseName, exerciseType){
+    console.log("entro en funcion selectItem");
+    
+    var item = {
+      id: exerciseId,
+      name: exerciseName,
+      type: exerciseType,
+      index: this.numExercises
+    };
+    this.selectedExerciseList.push(item);
+    this.numExercises++;
+    console.log("llista de ejercicios seleccionados:", this.selectedExerciseList);
+    
   }
 
   //ionViewDidLoad() {

@@ -21,14 +21,14 @@
   </ion-segment>
   <ion-list>
     <!--ion-item *ngFor="let exercise of exercise | async"-->
-    <ion-item *ngFor="let exercise of exerciseList">  
+    <button ion-item *ngFor="let exercise of exerciseList" (click)="selectItem(exercise.$key, exercise.exercise, exercise.type)">  
         {{ exercise.exercise }}
-    </ion-item>
+    </button>
   </ion-list>
 </ion-content>
 
 <ion-footer>
   <ion-toolbar>
-    <ion-title>elementos seleccionados</ion-title>
+    <ion-title>{{ numExercises }} elementos seleccionados</ion-title>
   </ion-toolbar>
 </ion-footer>
