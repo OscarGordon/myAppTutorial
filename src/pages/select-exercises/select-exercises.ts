@@ -4,7 +4,7 @@ import { IonicPage, NavController, NavParams, AlertController, ActionSheetContro
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabaseModule, AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
-import firebase from 'firebase';
+//import firebase from 'firebase';
 
 
 
@@ -15,54 +15,34 @@ import firebase from 'firebase';
 })
 export class SelectExercisesPage {
   exercises: FirebaseListObservable<any>;
-  //public exerciseList: Array<any>;
+  //Array para almacenar la lista de ejercicios cargada desde Firebase
   public exerciseList: any[] = [];
-
-  //public loadedExerciseList: Array<any>;
+  //Array para almacenar la lista inicial de ejercicios, y evitar consultas recurrentes
   public loadedExerciseList: any[] = [];
-  //public exerciseRef: firebase.database.Reference;
-
-  //searchQuery: string ='';
+  
 
   constructor(public navCtrl: NavController, public af: AngularFireDatabase, public alertCtrl: AlertController, 
       public actionSheetCtrl: ActionSheetController) {
+        //Recuperamos la lista de ejercicios del backend
         this.exercises = af.list('/exercises');
-        console.log ("listado de ejercicios: ", this.exercises);
-        /* this.exercises.forEach( exercise => {
-          console.log("ejercicio: ", exercise);
-          this.exerciseList.push(exercise)});*/
+        // console.log ("listado de ejercicios: ", this.exercises);
+        
+        //Almacenamos la lista de ejercicios en un array
           this.exercises.subscribe( exercises => {
             exercises.forEach(exercise => {
-              console.log("ejercicio: ", exercise);
+              //console.log("ejercicio: ", exercise);
               this.exerciseList.push(exercise);
-              console.log("listado: ", this.exerciseList);
+              //console.log("listado: ", this.exerciseList);
             });
+            //Inicializamos array con los datos iniciales, para utilizar en función de inicialización
             this.loadedExerciseList = this.exerciseList;
-            console.log("listado cargado: ", this.loadedExerciseList);
+            //console.log("listado cargado: ", this.loadedExerciseList);
           });
-          
-          
-          
-        
-        //this.exerciseRef = firebase.database().ref('/exercises');
-
-       /* this.exerciseRef.on('value', exerciseList => {
-          let exercises = [];
-          exerciseList.forEach( exercise => {
-            exercises.push(exercise.val());
-            return false;
-          });
-
-          this.exerciseList = exercises;
-          this.loadedExerciseList = exercises;
-        }); */
-        
+                         
   }
 
   initializeExercises(): void {
-    //this.exercises = this.af.list('/exercises');
-    this.exerciseList = this.loadedExerciseList;
-    
+    this.exerciseList = this.loadedExerciseList;    
     }
   
 
@@ -75,12 +55,37 @@ export class SelectExercisesPage {
 
     // if the value is an empty string then do not filter the items
     if (val && val.trim() != ''){
-      console.log('entro por el if de cadena no vacia', val);
+      //console.log('entro por el if de cadena no vacia', val);
       this.exerciseList = this.exerciseList.filter((exercise) => {
           return (exercise.exercise.toLowerCase().indexOf(val.toLowerCase()) > -1)
       })
     }
 
+  }
+
+  selectedWeight(value){
+    console.log('query: ', value);
+    if (value == ''){
+      console.log('inicializo lista: ', value);
+    this.initializeExercises();
+    }
+    this.exerciseList = this.exerciseList.filter((exercise) => {        
+        return (exercise.type.toLowerCase().indexOf("weightlifting") > -1)
+    })
+  }
+
+  selectedGymnastics(){
+    this.initializeExercises();
+    this.exerciseList = this.exerciseList.filter((exercise) => {        
+        return (exercise.type.toLowerCase().indexOf("gymnastics") > -1)
+    })
+  }
+
+  selectedEndurance(){
+    this.initializeExercises();
+    this.exerciseList = this.exerciseList.filter((exercise) => {        
+        return (exercise.type.toLowerCase().indexOf("endurance") > -1)
+    })
   }
 
   //ionViewDidLoad() {
