@@ -13,9 +13,9 @@
 
 
 <ion-content padding>
-  <ion-searchbar padding (ionInput)="getExercises($event)"></ion-searchbar>
+  <ion-searchbar padding (ionInput)="getExercises($event)" [(ngModel)]="searchString"></ion-searchbar>
   <ion-segment padding>
-    <ion-segment-button value="Fuerza" (ionSelect)="selectedWeight($event.target.value)">Fuerza</ion-segment-button>
+    <ion-segment-button value="Fuerza" (ionSelect)="selectedWeight()">Fuerza</ion-segment-button>
     <ion-segment-button value="Endurance" (ionSelect)="selectedEndurance()">Endurance</ion-segment-button>
     <ion-segment-button value="Gimnastico" (ionSelect)="selectedGymnastics()">Gimnástico</ion-segment-button>
   </ion-segment>

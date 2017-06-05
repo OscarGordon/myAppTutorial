@@ -19,7 +19,10 @@ export class SelectExercisesPage {
   public exerciseList: any[] = [];
   //Array para almacenar la lista inicial de ejercicios, y evitar consultas recurrentes
   public loadedExerciseList: any[] = [];
-  
+  //variable para almacenar la cadena de búsqueda
+  public searchString = '';
+  //variable para almacenar el valor del segmento
+  public segmentValue = '';
 
   constructor(public navCtrl: NavController, public af: AngularFireDatabase, public alertCtrl: AlertController, 
       public actionSheetCtrl: ActionSheetController) {
@@ -57,34 +60,36 @@ export class SelectExercisesPage {
     if (val && val.trim() != ''){
       //console.log('entro por el if de cadena no vacia', val);
       this.exerciseList = this.exerciseList.filter((exercise) => {
-          return (exercise.exercise.toLowerCase().indexOf(val.toLowerCase()) > -1)
+          return (exercise.exercise.toLowerCase().indexOf(val.toLowerCase()) > -1 && exercise.type.toLowerCase().indexOf(this.segmentValue) > -1)
       })
     }
 
   }
 
-  selectedWeight(value){
-    console.log('query: ', value);
-    if (value == ''){
-      console.log('inicializo lista: ', value);
+  selectedWeight(){
+    this.segmentValue = 'weightlifting';
+     //console.log("search string: ", this.searchString);
     this.initializeExercises();
-    }
     this.exerciseList = this.exerciseList.filter((exercise) => {        
-        return (exercise.type.toLowerCase().indexOf("weightlifting") > -1)
+        return (exercise.type.toLowerCase().indexOf("weightlifting") > -1 && exercise.exercise.toLowerCase().indexOf(this.searchString.toLowerCase()) > -1)
     })
   }
 
   selectedGymnastics(){
+    this.segmentValue = 'gymnastics';
+    //console.log("search string: ", this.searchString);
     this.initializeExercises();
     this.exerciseList = this.exerciseList.filter((exercise) => {        
-        return (exercise.type.toLowerCase().indexOf("gymnastics") > -1)
+        return (exercise.type.toLowerCase().indexOf("gymnastics") > -1 && exercise.exercise.toLowerCase().indexOf(this.searchString.toLowerCase()) > -1)
     })
   }
 
   selectedEndurance(){
+    this.segmentValue = 'endurance';
+    //console.log("search string: ", this.searchString);
     this.initializeExercises();
     this.exerciseList = this.exerciseList.filter((exercise) => {        
-        return (exercise.type.toLowerCase().indexOf("endurance") > -1)
+        return (exercise.type.toLowerCase().indexOf("endurance") > -1 && exercise.exercise.toLowerCase().indexOf(this.searchString.toLowerCase()) > -1)
     })
   }
 
