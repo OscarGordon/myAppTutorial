@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, ActionSheetController  } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ActionSheetController, ToastController  } from 'ionic-angular';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabaseModule, AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
-//import firebase from 'firebase';
+import { NewSessionPage } from '../new-session/new-session';
 
 
 
@@ -27,10 +27,12 @@ export class SelectExercisesPage {
   public selectedExerciseList: any[] = [];
   //Variable para contar el número de ejercicios seleccionados
   public numExercises = 0;
+  //Variable para habilitar el botón "siguiente"
+  public nextDisabled=true;
 
   
   constructor(public navCtrl: NavController, public af: AngularFireDatabase, public alertCtrl: AlertController, 
-      public actionSheetCtrl: ActionSheetController) {
+      public actionSheetCtrl: ActionSheetController, public toastCtrl: ToastController) {
         //Recuperamos la lista de ejercicios del backend
         this.exercises = af.list('/exercises');
         // console.log ("listado de ejercicios: ", this.exercises);
@@ -46,7 +48,7 @@ export class SelectExercisesPage {
             this.loadedExerciseList = this.exerciseList;
             //console.log("listado cargado: ", this.loadedExerciseList);
           });
-                         
+          console.log("next deshabilitado: ", this.nextDisabled);              
   }
 
   initializeExercises(): void {
@@ -111,6 +113,26 @@ export class SelectExercisesPage {
     this.numExercises++;
     console.log("llista de ejercicios seleccionados:", this.selectedExerciseList);
     
+  }
+
+  goToNextPage(){
+    if(this.numExercises == 0){
+      let toast = this.toastCtrl.create({
+        message: 'Por favor, selecciona al menos un ejercicio',
+        duration: 3000,
+        position: 'top'
+      });
+      toast.present();
+    }
+    else {
+      this.navCtrl.push(NewSessionPage, {
+        selectedExerciseList: this.selectedExerciseList
+      });
+    }
+  }
+
+  goToPreviousPage(){
+  this.navCtrl.pop();
   }
 
   //ionViewDidLoad() {

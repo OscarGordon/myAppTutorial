@@ -1,12 +1,12 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons start>
-      <button ion-button>Cancelar</button>
+      <button ion-button (click)="goToPreviousPage()">Cancelar</button>
     </ion-buttons>
     
     <ion-title>Selecciona Ejercicios</ion-title>
     <ion-buttons end>
-      <button ion-button>Siguiente</button>
+      <button ion-button (click)="goToNextPage()">Siguiente</button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
