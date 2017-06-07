@@ -1,18 +1,38 @@
-<!--
-  Generated template for the NewSessionPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>new-session</ion-title>
-  </ion-navbar>
-
+    <ion-title>Nueva sesión</ion-title>
+  </ion-navbar>  
 </ion-header>
 
-
 <ion-content padding>
-
+  <ion-item>   
+    <ion-datetime #woddate displayFormat="DDDD DD de MMMM" pickerFormat="DD MM YYYY" [(ngModel)]="todayDate" required cancelText="Cancelar" doneText="Aceptar">
+    </ion-datetime>    
+  </ion-item>
+  <ion-list inset no-lines>  
+    <ion-item *ngFor="let exercise of exerciseList">
+      <button ion-button icon-only item-right clear>
+        <ion-icon name="construct"></ion-icon>        
+      </button>
+      <ion-label>{{ exercise.name }}</ion-label>
+      <ion-input type="number" required placeholder="peso" item-right *ngIf="exercise.type=='weightlifting'"></ion-input>
+      <ion-input type="number" required placeholder="distancia" item-right *ngIf="exercise.type=='endurance'"></ion-input>
+      <ion-input type="number" required placeholder="reps" item-right *ngIf="exercise.type=='weightlifting'"></ion-input>
+      <ion-input type="number" required placeholder="reps" item-right *ngIf="exercise.type=='gymnastics'"></ion-input>      
+    </ion-item>
+  </ion-list>
+  <ion-row>
+    <ion-col width-50 style="text-align: center">
+        <button ion-button icon-only (click)="selectGoal()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-col>
+  </ion-row>
+  
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-title>Configura tu sesión</ion-title>
+  </ion-toolbar>
+</ion-footer>

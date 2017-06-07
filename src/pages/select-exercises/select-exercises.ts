@@ -34,7 +34,11 @@ export class SelectExercisesPage {
   constructor(public navCtrl: NavController, public af: AngularFireDatabase, public alertCtrl: AlertController, 
       public actionSheetCtrl: ActionSheetController, public toastCtrl: ToastController) {
         //Recuperamos la lista de ejercicios del backend
-        this.exercises = af.list('/exercises');
+        this.exercises = af.list('/exercises', {
+          query: {
+            orderByChild: 'exercise'
+          }
+        });
         // console.log ("listado de ejercicios: ", this.exercises);
         
         //Almacenamos la lista de ejercicios en un array
